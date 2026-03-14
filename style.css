@@ -1,0 +1,212 @@
+body {
+    background-color: rgb(36, 36, 36);
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.header {
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    background-color: rgba(19, 19, 19, 0.5);
+    text-align: center;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%
+}
+
+#assignmentPanel {
+    width: 70vw;
+    height: 85vh;
+    background-color: rgb(31, 31, 31);
+    border-color: white;
+    border-width: 4px;
+    border-radius: 20px;
+    overflow-y: scroll;
+    border-style: inset;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    visibility: visible;
+}
+
+#assignmentPanel::-webkit-scrollbar{
+    display: none;
+}
+
+.panelHeader {
+    margin-top: 0.2%;
+    font-family: "Ubuntu", sans-serif;
+    color: white;
+    font-size: 200%;
+    text-align: center;
+    background-color: rgba(0,0,0,0.2);
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    
+}
+
+.x {
+    position: absolute;
+    z-index: 10;
+    font-family: "Ubuntu", sans-serif;
+    display: inline-block;
+    right: 2%;
+    top: 2%;
+}
+
+#panelAssignmentName {
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    display:inline-block;
+    width: 18%;
+    text-align: center;
+}
+
+#inputName {
+    font-family: "Ubuntu", sans-serif;
+    margin-left: 3%;
+    width: 60%;
+
+    
+}
+
+#layer1 {
+    width: 100%;
+}
+
+#layer2 {
+    width: 100%;
+}
+
+#layer3 {
+    width: 100%;
+}
+
+#panelAssignmentDate {
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    display:inline-block;
+    width: 18%;
+    text-align: center;
+
+}
+
+#panelAssignmentDesc {
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    display:inline-block;
+    width: 18%;
+    text-align: center;
+
+}
+#panelAssignmentDiff {
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    display:inline-block;
+    width: 10%;
+    text-align: center;
+
+}
+
+#panelAssignmentTaskCompleted {
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    display:inline-block;
+    width: 18%;
+    text-align: center;
+}
+
+#panelAssignmentImportance {
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    display:inline-block;
+    width: 18%;
+    text-align: center;
+}
+
+#inputTask{
+    width: 5%;
+}
+
+#inputDate {
+    font-family: "Ubuntu", sans-serif;
+    margin-left: 3%;
+    width: 40%;
+}
+
+#inputDiff {
+    width: 5%;
+}
+
+#inputDesc {
+    height: 40%;
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+}
+
+#inputImportance {
+    width: 5%;
+}
+
+#submit {
+    height: 10%;
+    width: 15%;
+    margin: 0 auto;
+    display: block;
+    background-color: rgb(37, 37, 37);
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 120%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+.assignment {
+    width: 30%;
+    height: 70vh;
+    background-color: rgb(51, 51, 51);
+    z-index: 1;
+    border-color: white;
+    border-style: inset;
+    flex-shrink: 0;
+    border-radius: 20px;
+}
+
+#assignmentPool {
+    background-color: rgb(10, 10, 10);
+    width: 98%;
+    min-height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.assignmentName {
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 200%;
+    background-color: rgba(0,0,0,0.2);
+    margin-top: -1%;
+    text-align: center;
+}
+
+.dueDay {
+    color:white;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.desc {
+    color:white;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.urgency {
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+}

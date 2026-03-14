@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <link rel="stylesheet" , href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <script src="index.js" type="module">
+
+    </script>
+    <script type="module">
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.0.0-next.7';
+    </script>
+    <template class=".assignmentTemplate">
+        <div class="assignment">
+
+        </div>
+    </template>
+    <h1 class="header">Assignment Dashboard</h1>
+    <button id="addButton" onclick="addAssignment()">Add Assignment</button>
+    <div id="prioritAssignmentDesc"></div>
+    <div id="assignmentPool">
+        <div class="assignment">
+            <h3 class="assignmentName">Test</h3>
+            <p class="dueDay">Days Until Due: </p>
+            <p class="urgency">Urgency Score: </p>
+            <p class="desc">Description</p>
+        </div>
+        <div class="assignment">
+            <h3 class="assignmentName">Test</h3>
+            <p class="dueDay">Days Until Due: </p>
+            <p class="urgency">Urgency Score: </p>
+            <p class="desc">Description</p>
+        </div>
+        <div class="assignment">
+            <h3 class="assignmentName">Test</h3>
+            <p class="dueDay">Days Until Due: </p>
+            <p class="urgency">Urgency Score: </p>
+            <p class="desc">Description</p>
+        </div>
+    </div>
+    <div id="assignmentPanel">
+        <button class="x" onclick="removePanel()">X</button>
+        <h2 class="panelHeader">Add Assignment </h2>
+        <div id="layer1">
+            <p id="panelAssignmentName">Assignment Name</p>
+            <input id="inputName" type="text">
+        </div>
+        <div id="layer2">
+            <p id="panelAssignmentDate">Due Date</p>
+            <input id="inputDate" type="datetime-local">
+        </div>
+        <div id="layer3">
+            <p id="panelAssignmentDesc">Description</p>
+            <p id="panelAssignmentTaskCompleted">Tasks Completed (%)</p>
+            <input id="inputTask" type="text">
+            <p id="panelAssignmentImportance">Importance(1-10)</p>
+            <input id="inputImportance" type="text">
+            <p id="panelAssignmentDiff">Difficulty</p>
+            <input id="inputDiff" type="text">
+            <button id="estimate" onclick="estimate()">Estimate Difficulty</button>
+        </div>
+        <div id="layer4">
+            <textarea id="inputDesc" placeholder="Description is needed to estimate difficulty."></textarea>
+        </div>
+        <div id="layer5">
+            <button id="submit" onclick="completeAssignment()">Submit</button>
+        </div>
+    </div>
+</body>
+
+</html>
