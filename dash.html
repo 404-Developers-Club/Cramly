@@ -17,33 +17,21 @@
     <script type="module">
         import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.0.0-next.7';
     </script>
-    <template class=".assignmentTemplate">
+    <template class="assignmentTemplate">
         <div class="assignment">
-
+            <h3 class="assignmentName">Test</h3>
+            <p class="dueDay">Days Until Due: </p>
+            <p class="urgency">Urgency Score: </p>
+            <p class="desc">Description</p>
+            <button class="x2" onclick="done(event)">Done</button>
         </div>
     </template>
     <h1 class="header">Assignment Dashboard</h1>
     <button id="addButton" onclick="addAssignment()">Add Assignment</button>
     <div id="prioritAssignmentDesc"></div>
     <div id="assignmentPool">
-        <div class="assignment">
-            <h3 class="assignmentName">Test</h3>
-            <p class="dueDay">Days Until Due: </p>
-            <p class="urgency">Urgency Score: </p>
-            <p class="desc">Description</p>
-        </div>
-        <div class="assignment">
-            <h3 class="assignmentName">Test</h3>
-            <p class="dueDay">Days Until Due: </p>
-            <p class="urgency">Urgency Score: </p>
-            <p class="desc">Description</p>
-        </div>
-        <div class="assignment">
-            <h3 class="assignmentName">Test</h3>
-            <p class="dueDay">Days Until Due: </p>
-            <p class="urgency">Urgency Score: </p>
-            <p class="desc">Description</p>
-        </div>
+
+
     </div>
     <div id="assignmentPanel">
         <button class="x" onclick="removePanel()">X</button>

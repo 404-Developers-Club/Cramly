@@ -2,7 +2,7 @@ import { pipeline } from "https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17
 
 
 class Assignment {
-    constructor(aName, diffDesc, diff, imp, dueD, tC, elemental, deadDate) {
+    constructor(aName, diffDesc, diff, imp, dueD, tC, deadDate, elemental) {
         this.assignName = aName;
         this.difficultyDesc = diffDesc;
         this.difficulty = diff;
@@ -21,50 +21,42 @@ class Assignment {
 }
 
 // Constructor Values for Assigmenent
+let positioner;
+let assignElement;
 let tC;
 let ourDiff;
 let impBoxV;
 let assignList;
-
 let tempAssign;
-
 function sorter() {
-    // let assign = [...assignList];
-    // let temp = [];
-    // let minVal = Number.MIN_VALUE;
-    // for (let i = 0; i < assign.length; i += 1) {
-    //     if (assign[i].pScore > minVal)
-    //     {
-    //         temp.push(assign[i])
-    //         minVal 
-    //     }
-    // }
     let assign = [...assignList];
     assign.sort((a, b) => a.pScore - b.pScore);
     assignList = assign;
 }
-
 function placer() {
+    positioner = document.getElementById('assignmentPool');
+    positioner.replaceChildren()
     for (let i = 0; i < assignList.length; i += 1) {
-        tempAssign = document.querySelector('.assignmentTemplate');
+        tempAssign = document.getElementsByClassName('assignmentTemplate')[0];
         assignElement = tempAssign.content.cloneNode(true);
         assignList[i].element = assignElement.firstElementChild;
-
         assignElement.querySelector('.assignmentName').innerText = "Assignment Name: " + assignList[i].assignName;
-        assignElement.querySelector('.dueDay').innerText = "Due Date: " + this.deadlineDay;
-        assignElement.querySelector('.urgencyScore').innerText = "Urgency Score: " + this.ps
+        assignElement.querySelector('.dueDay').innerText = "Due Date: " + assignList[i].deadlineDay;
+        assignElement.querySelector('.urgency').innerText = "Urgency Score: " + String(assignList[i].pScore.toFixed(2));
+        assignElement.querySelector('.desc').innerText = "Description: " + assignList[i].difficultyDesc;
 
-        positioner.addChild(assignElement);
+        positioner.appendChild(assignElement);
 
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    
     if (localStorage.getItem('saveAList') == null) {
         assignList = [];
     } else {
         assignList = JSON.parse(localStorage.getItem('saveAList'));
-        positioner = document.getElementById('assignmentPool')[0];
+        positioner = document.getElementById('assignmentPool');
         sorter();
         placer();
     }
@@ -142,13 +134,15 @@ window.completeAssignment = function () {
 
     if (amountCorrect == 3) {
         // Create assignment object
-        const createAssign = new Assignment(document.getElementById('inputName').value, document.getElementById('inputDesc').value, ourDiff, impBoxV, document.querySelector('#inputDate').valueAsNumber, tC, document.querySelector('#inputDate').v);
+        const createAssign = new Assignment(document.getElementById('inputName').value, document.getElementById('inputDesc').value, ourDiff, impBoxV, document.querySelector('#inputDate').valueAsNumber, tC, document.querySelector('#inputDate').value);
         // Add assign object to list 
         assignList.push(createAssign);
         sorter();
         placer();
         // Save the assignment list
         localStorage.setItem('saveAList', JSON.stringify(assignList));
+        
+        console.log(assignList);
 
         // Hide the assignment panel
         document.getElementById('assignmentPanel').style.visibility = 'hidden';
@@ -158,6 +152,21 @@ window.completeAssignment = function () {
     }
 }
 
+window.done = function(event) {
+    for (let i=0; i < assignList.length; i+=1)
+    {
+        console.log(assignList[i].element)
+        console.log(event.target.parentElement)
+        if (assignList[i].element == event.target.parentElement)
+        {
+            assignList.splice(i, 1)
+            sorter()
+            placer()
+            localStorage.setItem('saveAList', JSON.stringify(assignList))
+        }
+    }
+    
+}
 
 window.openPage = function () {
     location.href = "dash.html";

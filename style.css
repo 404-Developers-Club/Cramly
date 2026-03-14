@@ -29,7 +29,7 @@ body {
     left: 50%;
     top: 50%;
     z-index: 10;
-    visibility: visible;
+    visibility: hidden;
 }
 
 #assignmentPanel::-webkit-scrollbar{
@@ -185,6 +185,7 @@ body {
     border-radius: 30px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .assignmentName {
@@ -209,4 +210,9 @@ body {
 .urgency {
     color: white;
     font-family: "Ubuntu", sans-serif;
+}
+
+.x2 {
+    position: relative;
+    top: 0;
 }
