@@ -28,6 +28,7 @@ let ourDiff;
 let impBoxV;
 let assignList;
 let tempAssign;
+
 function sorter() {
     let assign = [...assignList];
     assign.sort((a, b) => a.pScore - b.pScore);
@@ -42,7 +43,7 @@ function placer() {
         assignList[i].element = assignElement.firstElementChild;
         assignElement.querySelector('.assignmentName').innerText = "Assignment Name: " + assignList[i].assignName;
         assignElement.querySelector('.dueDay').innerText = "Due Date: " + assignList[i].deadlineDay;
-        assignElement.querySelector('.urgency').innerText = "Urgency Score: " + String(assignList[i].pScore.toFixed(2));
+        assignElement.querySelector('.urgency').innerText = "How much u can relax Score: " + String(assignList[i].pScore.toFixed(2));
         assignElement.querySelector('.desc').innerText = "Description: " + assignList[i].difficultyDesc;
 
         positioner.appendChild(assignElement);
