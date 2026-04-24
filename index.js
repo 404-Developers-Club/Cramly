@@ -11,7 +11,7 @@ class Assignment {
         if (((dueD - cDateV) / 86400000) < 0) {
             this.dueDate = 0;
         } else {
-            this.dueDate = (dueD - cDateV) / 86400000;
+            this.dueDate = 3.5*(Math.log10((((dueD - cDateV) / 86400000))+0.1)+1);
         }
         this.taskComp = tC;
         this.pScore = Math.sqrt(((diff - 10) ** 2) + ((imp - 10) ** 2) + (this.dueDate ** 2) + ((tC ** 2)));
@@ -34,6 +34,27 @@ function sorter() {
     assign.sort((a, b) => a.pScore - b.pScore);
     assignList = assign;
 }
+
+function formatDeadline(deadlineValue) {
+    if (!deadlineValue) {
+        return "Due date not set";
+    }
+
+    const deadline = new Date(deadlineValue);
+    if (Number.isNaN(deadline.getTime())) {
+        return `Due: ${deadlineValue}`;
+    }
+
+    return `Due: ${new Intl.DateTimeFormat("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+    }).format(deadline)}`;
+}
+
 function placer() {
     positioner = document.getElementById('assignmentPool');
     positioner.replaceChildren()
@@ -41,10 +62,21 @@ function placer() {
         tempAssign = document.getElementsByClassName('assignmentTemplate')[0];
         assignElement = tempAssign.content.cloneNode(true);
         assignList[i].element = assignElement.firstElementChild;
-        assignElement.querySelector('.assignmentName').innerText = "Assignment Name: " + assignList[i].assignName;
-        assignElement.querySelector('.dueDay').innerText = "Due Date: " + assignList[i].deadlineDay;
-        assignElement.querySelector('.urgency').innerText = "How much u can relax score: " + String(assignList[i].pScore.toFixed(2));
-        assignElement.querySelector('.desc').innerText = "Description: " + assignList[i].difficultyDesc;
+        assignElement.querySelector('.assignmentName').innerText = assignList[i].assignName;
+        assignElement.querySelector('.dueDay').innerText = formatDeadline(assignList[i].deadlineDay);
+        assignElement.querySelector('.urgency').innerText = "Leisure Score: " + String(assignList[i].pScore.toFixed(2));
+        assignElement.querySelector('.desc').innerText = "Description:\n" + assignList[i].difficultyDesc;
+
+        //if the assignment is urgent, change the upper color
+        if (assignList[i].pScore < 5){
+            console.log("THIS RAN")
+            console.log(assignElement.querySelector(".assignment"))
+            assignElement.querySelector(".assignment").style.setProperty("--article-color2", "rgba(251, 47, 47, 0.518)")
+            assignElement.querySelector(".assignment").style.setProperty("--article-color", "rgba(255, 148, 148, 0.52)")
+            assignElement.querySelector(".dueDay").style.setProperty("--article-color", "rgba(255, 148, 148, 0.52)")
+             assignElement.querySelector(".assignmentAlertIcon").style.setProperty("visibility", "visible")
+        }
+        
 
         positioner.appendChild(assignElement);
 
@@ -52,6 +84,16 @@ function placer() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const dueDateInput = document.getElementById('inputDate');
+    if (dueDateInput && typeof dueDateInput.showPicker === 'function') {
+        const openDatePicker = () => {
+            dueDateInput.showPicker();
+        };
+
+        dueDateInput.addEventListener('click', openDatePicker);
+        dueDateInput.addEventListener('focus', openDatePicker);
+    }
+
     
     if (localStorage.getItem('saveAList') == null) {
         assignList = [];
@@ -132,8 +174,10 @@ window.completeAssignment = function () {
             document.getElementById('inputTask').style.color = 'red';
         }
     }
-
-    if (amountCorrect == 3) {
+    
+    console.log("val as date:" + document.getElementById('inputDate').value)
+//fix
+    if ((amountCorrect == 3) && (document.getElementById('inputDate').value !== "")) {
         // Create assignment object
         const createAssign = new Assignment(document.getElementById('inputName').value, document.getElementById('inputDesc').value, ourDiff, impBoxV, document.querySelector('#inputDate').valueAsNumber, tC, document.querySelector('#inputDate').value);
         // Add assign object to list 

@@ -1,244 +1,449 @@
-body {
-    background-color: rgb(36, 36, 36);
-    margin: 0;
-    padding: 0;
+:root {
+    color-scheme: dark;
+    --bg: #111315;
+    --bg-soft: #1a1d21;
+    --panel: rgba(20, 24, 28, 0.92);
+    --panel-strong: #171a1f;
+    --card: #20242b;
+    --card-hover: #262b33;
+    --border: rgba(255, 255, 255, 0.12);
+    --border-strong: rgba(255, 255, 255, 0.24);
+    --text: #f5f7fa;
+    --muted: #b7c0cb;
+    --accent: #8bd3ff;
+    --accent-strong: #58b7f5;
+    --danger: #ff8f8f;
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
 }
 
+* {
+    box-sizing: border-box;
+}
 
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--text);
+    font-family: "Ubuntu", sans-serif;
+    color-scheme: dark;
+    background:
+        radial-gradient(circle at top, rgba(88, 183, 245, 0.18), transparent 28%),
+        linear-gradient(180deg, #171a1f 0%, #0d0f12 100%);
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: linear-gradient(180deg, #2d333c 0%, #222730 100%);
+    color: var(--text);
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    border-color: var(--border-strong);
+    background: linear-gradient(180deg, #343b45 0%, #262c35 100%);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+input,
+textarea {
+    width: 100%;
+    color-scheme: dark;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+}
+
+input:focus,
+textarea:focus {
+    outline: 2px solid rgba(139, 211, 255, 0.35);
+    outline-offset: 1px;
+    border-color: rgba(139, 211, 255, 0.45);
+}
+
+textarea {
+    resize: vertical;
+}
+
+.eyebrow {
+    margin: 0 0 0.6rem;
+    color: var(--accent);
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.landing-page {
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+}
+
+.hero {
+    width: min(100%, 1100px);
+}
+
+.hero-card {
+    padding: clamp(2.5rem, 7vw, 5rem);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background:
+        linear-gradient(135deg, rgba(139, 211, 255, 0.1), transparent 45%),
+        rgba(15, 18, 22, 0.8);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+#title,
+.header-title,
+.panelHeader,
+.assignmentName {
+    font-family: "Montserrat", sans-serif;
+}
+
+#title {
+    margin: 0;
+    font-size: clamp(3rem, 10vw, 6rem);
+    line-height: 0.95;
+}
+
+.hero-copy {
+    width: min(100%, 42rem);
+    margin: 1.25rem auto 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+#start {
+    min-width: 12rem;
+    margin-top: 2rem;
+    padding: 0.95rem 1.5rem;
+    font-weight: 700;
+}
+
+.dashboard-shell {
+    width: min(100%, 1280px);
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+}
 
 .header {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    background-color: rgba(19, 19, 19, 0.5);
-    text-align: center;
-    padding-top: 0.5%;
-    padding-bottom: 0.5%
+    margin-bottom: 1.5rem;
 }
 
-#assignmentPanel {
-    width: 70vw;
-    height: 85vh;
-    background-color: rgb(31, 31, 31);
-    border-color: white;
-    border-width: 4px;
-    border-radius: 20px;
-    overflow-y: scroll;
-    border-style: inset;
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: rgba(17, 21, 25, 0.78);
+    box-shadow: var(--shadow);
+}
+
+.header-title {
+    margin: 0;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+#addButton {
+    padding: 0.9rem 1.35rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.dashboard-content {
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: rgba(10, 12, 15, 0.72);
+}
+
+.dashboard-note {
+    min-height: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--muted);
+}
+
+#assignmentPool {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+}
+
+.assignment {
+    --article-color: rgba(139, 211, 255, 0.2);
+    --article-color2: rgb(88, 183, 245);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    min-height: 20rem;
+    padding: 1.45rem;
+    border: 1px solid rgba(139, 211, 255, 0.12);
+    border-radius: 22px;
+    background:
+        linear-gradient(180deg, rgba(139, 211, 255, 0.08), transparent 28%),
+        linear-gradient(180deg, var(--card) 0%, #1b2026 100%);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+    overflow: hidden;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.assignment:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 211, 255, 0.28);
+    background:
+        linear-gradient(180deg, rgba(139, 211, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, var(--card-hover) 0%, #20262d 100%);
+    box-shadow: 0 22px 46px rgba(0, 0, 0, 0.3);
+}
+
+.assignment::before {
+    content: "";
     position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    z-index: 10;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--article-color2), var(--article-color));
+}
+
+.assignmentHeading {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding-bottom: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.assignmentName {
+    margin: 0;
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    padding: 0.15rem 0 0;
+}
+
+.assignmentAlertIcon {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+    object-fit: contain;
     visibility: hidden;
 }
 
-#assignmentPanel::-webkit-scrollbar{
-    display: none;
+.assignmentDetails {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-height: 0;
+}
+
+.dueDay,
+.desc,
+.urgency {
+    margin: 0;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.desc {
+    flex: 1;
+    white-space: pre-wrap;
+}
+
+.x2 {
+    align-self: flex-end;
+    min-width: 7rem;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+}
+
+.dueDay {
+    border-color: rgba(139, 211, 255, 0.12);
+    background: rgba(139, 211, 255, 0.07);
+    color: var(--text);
+    font-weight: 500;
+}
+
+.urgency {
+    color: #d9e8f2;
+}
+
+#assignmentPanel {
+    position: fixed;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    width: min(92vw, 900px);
+    max-height: 88vh;
+    padding: 1.75rem;
+    overflow-y: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: 28px;
+    background:
+        linear-gradient(135deg, rgba(139, 211, 255, 0.08), transparent 35%),
+        var(--panel);
+    box-shadow: var(--shadow);
+    visibility: hidden;
+    z-index: 10;
+}
+
+#assignmentPanel::-webkit-scrollbar {
+    width: 0.65rem;
+}
+
+#assignmentPanel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
 }
 
 .panelHeader {
-    margin-top: 0.2%;
-    font-family: "Ubuntu", sans-serif;
-    color: white;
-    font-size: 200%;
-    text-align: center;
-    background-color: rgba(0,0,0,0.2);
-    margin-top: 0.5%;
-    margin-bottom: 0.5%;
-    
+    margin: 0 0 1.5rem;
+    padding-right: 3rem;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
 }
 
 .x {
     position: absolute;
-    z-index: 10;
-    font-family: "Ubuntu", sans-serif;
-    display: inline-block;
-    right: 2%;
-    top: 2%;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
 }
 
-#panelAssignmentName {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    display:inline-block;
-    width: 18%;
-    text-align: center;
+.panel-row {
+    display: grid;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1.1rem;
 }
 
-#inputName {
-    font-family: "Ubuntu", sans-serif;
-    margin-left: 3%;
-    width: 60%;
-
-    
-}
-
-#layer1 {
-    width: 100%;
-}
-
+#layer1,
 #layer2 {
-    width: 100%;
+    grid-template-columns: minmax(150px, 220px) 1fr;
 }
 
-#layer3 {
-    width: 100%;
+.panel-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.1rem;
 }
 
-#panelAssignmentDate {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    display:inline-block;
-    width: 18%;
-    text-align: center;
-
+.field-group {
+    display: grid;
+    gap: 0.65rem;
 }
 
-#panelAssignmentDesc {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    display:inline-block;
-    width: 18%;
-    text-align: center;
-
+.field-group-wide {
+    grid-column: 1 / -1;
 }
+
+.field-group-action {
+    align-self: end;
+}
+
+#panelAssignmentName,
+#panelAssignmentDate,
+#panelAssignmentDesc,
+#panelAssignmentTaskCompleted,
+#panelAssignmentImportance,
 #panelAssignmentDiff {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    display:inline-block;
-    width: 10%;
-    text-align: center;
-
+    color: var(--text);
+    font-weight: 500;
 }
 
-#panelAssignmentTaskCompleted {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    display:inline-block;
-    width: 18%;
-    text-align: center;
-}
-
-#panelAssignmentImportance {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    display:inline-block;
-    width: 18%;
-    text-align: center;
-}
-
-#inputTask{
-    width: 5%;
-}
-
-#inputDate {
-    font-family: "Ubuntu", sans-serif;
-    margin-left: 3%;
-    width: 40%;
-}
-
+#inputTask,
+#inputImportance,
 #inputDiff {
-    width: 5%;
+    min-width: 0;
 }
 
 #inputDesc {
-    height: 40%;
-    width: 90%;
-    display: block;
-    margin: 0 auto;
+    min-height: 12rem;
 }
 
-#inputImportance {
-    width: 5%;
+#estimate,
+#submit {
+    padding: 0.85rem 1.1rem;
+    font-weight: 700;
+}
+
+.panel-submit {
+    justify-content: center;
 }
 
 #submit {
-    height: 10%;
-    width: 15%;
+    width: min(100%, 12rem);
     margin: 0 auto;
-    display: block;
-    background-color: rgb(37, 37, 37);
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    font-size: 120%;
-    margin-top: 2.5%;
-    margin-bottom: 2.5%;
 }
 
-.assignment {
-    width: 30%;
-    height: 70vh;
-    background-color: rgb(51, 51, 51);
-    z-index: 1;
-    border-color: white;
-    border-style: inset;
-    flex-shrink: 0;
-    border-radius: 20px;
+@media (max-width: 800px) {
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #addButton {
+        width: 100%;
+    }
+
+    #layer1,
+    #layer2,
+    .panel-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #assignmentPanel {
+        padding: 1.25rem;
+    }
 }
 
-#assignmentPool {
-    background-color: rgb(10, 10, 10);
-    width: 98%;
-    min-height: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
+@media (max-width: 520px) {
+    .landing-page {
+        padding: 1rem;
+    }
 
-.assignmentName {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    font-size: 200%;
-    background-color: rgba(0,0,0,0.2);
-    margin-top: -1%;
-    text-align: center;
-}
+    .dashboard-shell {
+        padding: 1rem 0.75rem 2rem;
+    }
 
-.dueDay {
-    color:white;
-    font-family: "Ubuntu", sans-serif;
-}
-
-.desc {
-    color:white;
-    font-family: "Ubuntu", sans-serif;
-}
-
-.urgency {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-}
-
-.x2 {
-    position: relative;
-    top: 0;
-    color: white;
-    background-color: rgb(39, 39, 39);
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
-#start {
-    background-color: rgb(55, 55, 55);
-    color: white;
-    width: 10%;
-    height: 10%;
-    border-radius: 15px;
-    position:absolute;
-    left: 50%;
-    top:60%;
-    transform: translate(-50%);
-}
-
-#title {
-    color: white;
-    font-family: "Ubuntu", sans-serif;
-    position:absolute;
-    left: 50%;
-    top:30%;
-    transform: translate(-50%);
+    .hero-card,
+    .header-inner,
+    .dashboard-content,
+    #assignmentPanel {
+        border-radius: 20px;
+    }
 }

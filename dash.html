@@ -1,66 +1,94 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" , href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cramly Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Ubuntu:wght@400;500;700&display=swap"
         rel="stylesheet">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <script src="index.js" type="module">
-
-    </script>
-    <script type="module">
-        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.0.0-next.7';
-    </script>
     <template class="assignmentTemplate">
-        <div class="assignment">
-            <h3 class="assignmentName">Test</h3>
-            <p class="dueDay">Days Until Due: </p>
-            <p class="urgency">Urgency Score: </p>
-            <p class="desc">Description</p>
-            <button class="x2" onclick="done(event)">Done</button>
-        </div>
+        <article class="assignment">
+            <div class="assignmentHeading">
+                <h3 class="assignmentName">Test</h3>
+                <img class="assignmentAlertIcon" src="AlertIcon.png" alt="Alert icon">
+            </div>
+            <div class="assignmentDetails">
+                <p class="dueDay">Days Until Due: </p>
+                <p class="urgency">Urgency Score: </p>
+                <p class="desc">Description</p>
+            </div>
+            <button class="x2" type="button" onclick="done(event)">Done</button>
+        </article>
     </template>
-    <h1 class="header">Assignment Dashboard</h1>
-    <button id="addButton" onclick="addAssignment()">Add Assignment</button>
-    <div id="prioritAssignmentDesc"></div>
-    <div id="assignmentPool">
 
+    <main class="dashboard-shell">
+        <header class="header">
+            <div class="header-inner">
+                <div>
+                    <p class="eyebrow">Assignment planner</p>
+                    <h1 class="header-title">Assignment Dashboard</h1>
+                </div>
+                <button id="addButton" type="button" onclick="addAssignment()">Add Assignment</button>
+            </div>
+        </header>
 
-    </div>
-    <div id="assignmentPanel">
-        <button class="x" onclick="removePanel()">X</button>
-        <h2 class="panelHeader">Add Assignment </h2>
-        <div id="layer1">
-            <p id="panelAssignmentName">Assignment Name</p>
-            <input id="inputName" type="text">
+        <section class="dashboard-content" aria-label="Assignments overview">
+            <div id="prioritAssignmentDesc" class="dashboard-note"></div>
+            <div id="assignmentPool"></div>
+        </section>
+    </main>
+
+    <section id="assignmentPanel" aria-label="Add assignment panel">
+        <button class="x" type="button" onclick="removePanel()" aria-label="Close panel">X</button>
+        <h2 class="panelHeader">Add Assignment</h2>
+
+        <div id="layer1" class="panel-row">
+            <label id="panelAssignmentName" for="inputName">Assignment Name</label>
+            <input id="inputName" type="text" autocomplete="off">
         </div>
-        <div id="layer2">
-            <p id="panelAssignmentDate">Due Date</p>
+
+        <div id="layer2" class="panel-row">
+            <label id="panelAssignmentDate" for="inputDate">Due Date</label>
             <input id="inputDate" type="datetime-local">
         </div>
-        <div id="layer3">
-            <p id="panelAssignmentDesc">Description</p>
-            <p id="panelAssignmentTaskCompleted">Tasks Completed (%)</p>
-            <input id="inputTask" type="text">
-            <p id="panelAssignmentImportance">Importance(1-10)</p>
-            <input id="inputImportance" type="text">
-            <p id="panelAssignmentDiff">Difficulty</p>
-            <input id="inputDiff" type="text">
-            <button id="estimate" onclick="estimate()">Estimate Difficulty</button>
+
+        <div id="layer3" class="panel-grid">
+    
+            <div class="field-group">
+                <label id="panelAssignmentTaskCompleted" for="inputTask">Tasks Completed (%)</label>
+                <input id="inputTask" type="text" inputmode="decimal">
+            </div>
+            <div class="field-group">
+                <label id="panelAssignmentImportance" for="inputImportance">Importance (1-10)</label>
+                <input id="inputImportance" type="text" inputmode="decimal">
+            </div>
+            <div class="field-group">
+                <label id="panelAssignmentDiff" for="inputDiff">Difficulty</label>
+                <input id="inputDiff" type="text" inputmode="decimal">
+            </div>
+            <div class="field-group field-group-action">
+                <button id="estimate" type="button" onclick="estimate()">Estimate Difficulty</button>
+            </div>
+            <div class="field-group field-group-wide">
+                <label id="panelAssignmentDesc" for="inputDesc">Description</label>
+            </div>
         </div>
-        <div id="layer4">
+
+        <div id="layer4" class="panel-row">
             <textarea id="inputDesc" placeholder="Description is needed to estimate difficulty."></textarea>
         </div>
-        <div id="layer5">
-            <button id="submit" onclick="completeAssignment()">Submit</button>
-        </div>
-    </div>
-</body>
 
+        <div id="layer5" class="panel-row panel-submit">
+            <button id="submit" type="button" onclick="completeAssignment()">Submit</button>
+        </div>
+    </section>
+
+    <script src="index.js" type="module"></script>
+</body>
 </html>
