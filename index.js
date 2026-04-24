@@ -7,6 +7,7 @@ class Assignment {
         this.difficultyDesc = diffDesc;
         this.difficulty = diff;
         this.importance = imp;
+        this.dueD = dueD;
 
         if (((dueD - cDateV) / 86400000) < 0) {
             this.dueDate = 0;
@@ -33,6 +34,19 @@ function sorter() {
     let assign = [...assignList];
     assign.sort((a, b) => a.pScore - b.pScore);
     assignList = assign;
+}
+
+//basically to update/get the pscores as accurate as possible
+function reconfig() {
+    for (let i = 0; i < assignList.length; i += 1) { 
+         if (((assignList[i].dueD - cDateV) / 86400000) < 0) {
+            assignList[i].dueDate = 0;
+        } else {
+            assignList[i].dueDate = 3.5*(Math.log10((((assignList[i].dueD - cDateV) / 86400000))+0.1)+1);
+        }
+
+        assignList[i].pScore = Math.sqrt(((assignList[i].difficulty - 10) ** 2) + ((assignList[i].importance - 10) ** 2) + (assignList[i].dueDate ** 2) + ((assignList[i].taskComp ** 2)));
+    }
 }
 
 function formatDeadline(deadlineValue) {
@@ -100,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         assignList = JSON.parse(localStorage.getItem('saveAList'));
         positioner = document.getElementById('assignmentPool');
+        reconfig();
         sorter();
         placer();
     }
